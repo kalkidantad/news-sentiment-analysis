@@ -14,3 +14,11 @@ def test_core_imports():
 def test_sample_news_exists():
     csv_path = Path(__file__).resolve().parents[1] / "data" / "raw" / "sample_news.csv"
     assert csv_path.is_file(), "Bundled sample should exist for reproducible EDA"
+
+
+def test_task2_stack_imports():
+    """TA-Lib / PyNance / yfinance wheels are required for the Task 2 notebook."""
+    import talib  # noqa: F401
+    import yfinance  # noqa: F401
+
+    import pynance  # noqa: F401
