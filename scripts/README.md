@@ -1,3 +1,3 @@
 # Scripts
 
-CLI or batch jobs (e.g. data download, feature builds) live here. Empty for Task 1; add scripts as pipelines grow.
+Use this folder for **CLI helpers** (downloads, batch ETL, feature builds). None are mandatory for Task 1; add scripts next to notebooks or modules as pipelines grow—run them from the repository root (`python scripts/<name>.py`) so imports and relative paths behave consistently.
