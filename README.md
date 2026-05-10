@@ -6,30 +6,46 @@ Exploratory and predictive analysis linking **financial news headlines** (FNSPID
 
 | Path | Purpose |
 |------|---------|
-| `data/raw/` | Place the full Financial News dataset CSV here |
+| `data/raw/` | Source headlines CSV (`financial_news.csv` or bundled `sample_news.csv`) |
+| `data/newdata/` | Optional local folder for normalized or derived extracts (typically `*.csv`; see [.gitignore](.gitignore)) |
 | `notebooks/` | Jupyter notebooks (EDA and later modeling) |
-| `src/` | Reusable Python modules |
-| `tests/` | Automated tests (`pytest`) |
-| `scripts/` | One-off CLI utilities |
+| `src/` | Shared Python modules (extend as pipelines grow) |
+| `tests/` | Automated checks (`pytest`) |
+| `scripts/` | CLI or batch helpers (see [scripts/README.md](scripts/README.md)) |
 
 ## Data
 
-Expected columns align with the FNSPID specification:
+Your **input** CSV should match the usual FNSPID-style fields (matched case-insensitively):
 
 - `headline` — article title  
-- `url` — article link  
+- `url` — article link (required on disk for validation with the sample schema; **not kept** in the analysis dataframe—the notebook selects `headline`, `publisher`, `date`, and `stock` only)  
 - `publisher` — author or outlet  
-- `date` — publication datetime (prefer timezone-aware; spec references UTC−4)  
+- `date` — publication datetime (timezone-aware preferred; UTC is used internally after parsing)  
 - `stock` — ticker symbol (e.g. `AAPL`)
 
-**Local setup**
+Exports whose first column is an automatic row index (`Unnamed: 0`, etc.) drop those `Unnamed*` columns before validation.
 
-1. Copy your full dataset to `data/raw/financial_news.csv` (or symlink your export; set `EDA_NEWS_PATH` in the notebook to point at any path). Exports whose first CSV column is a row index (for example Benzinga `raw_analyst_ratings`-style dumps) drop `Unnamed` columns automatically.  
-2. A small `data/raw/sample_news.csv` is bundled so EDA runs in CI and fresh clones without the full dump.
+### Local setup
 
-Do not commit massive CSVs—`.gitignore` excludes common raw paths (`data/raw/*.csv` except `sample_news.csv`; `**/raw_analyst_ratings.csv`).
+1. Put the full dataset at `data/raw/financial_news.csv`, or symlink it there. Prefer **not** to commit large dumps.  
+2. `data/raw/sample_news.csv` is included so CI and lightweight clones always have usable input.
 
-Historical OHLCV data will be wired in later tasks (e.g. YFinance).
+**Override CSV path**
+
+Set **`EDA_NEWS_PATH`** (shell environment variable) to the CSV you want—for example export it in the terminal before launching Jupyter:
+
+```bash
+export EDA_NEWS_PATH=/path/to/your_dump.csv
+jupyter notebook notebooks/01_eda_financial_news.ipynb
+```
+
+Resolution order: `EDA_NEWS_PATH`, then `data/raw/financial_news.csv`, then `data/raw/sample_news.csv`.
+
+Normalized or intermediate tables you produce locally may go under **`data/newdata/`**; keep large `*.csv` files out of version control unless they are deliberate small artifacts.
+
+**.gitignore** (high level): `data/raw/*.csv` except `sample_news.csv`; `data/newdata/*.csv`; `**/raw_analyst_ratings.csv`; ignored paths under `data/raw/newsData/`.
+
+Historical OHLCV integration is planned for later tasks (for example Yahoo Finance).
 
 ## Environment
 
@@ -39,13 +55,17 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Run the exploratory notebook:
+Use the exploratory notebook:
 
 ```bash
 jupyter notebook notebooks/01_eda_financial_news.ipynb
 ```
 
-**Important:** Jupyter must use the **same Python** where you ran `pip install -r requirements.txt`. In Cursor / VS Code, use the notebook **kernel / interpreter picker** and select `.venv/bin/python` from this repo. If `sklearn` is missing in the notebook, you are almost certainly on the wrong interpreter. Optional: register that env once with `python -m ipykernel install --user --name news-sentiment --display-name "Python (news-sentiment .venv)"`.
+Use the **same interpreter** where you ran `pip install`: in Cursor / VS Code, choose the **`./.venv/bin/python`** kernel (Windows: `.venv\Scripts\python.exe`). Missing `sklearn` in-cell almost always means the wrong kernel—switch interpreter or reinstall requirements in that env. Optional kernel registration:
+
+```bash
+python -m ipykernel install --user --name news-sentiment --display-name "Python (news-sentiment .venv)"
+```
 
 ## Branches
 
@@ -54,4 +74,4 @@ jupyter notebook notebooks/01_eda_financial_news.ipynb
 
 ## CI
 
-GitHub Actions runs `pytest tests/` on push and pull request.
+GitHub Actions runs `pytest tests/` on push and pull requests.
