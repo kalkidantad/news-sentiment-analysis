@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+.env
+.venv/
+.python-version
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.idea/
+
+# Large / local datasets (keep sample only in repo per README)
+data/raw/*.csv
+!data/raw/sample_news.csv
+data/raw/newsData/
+**/raw_analyst_ratings.csv
+
+# OS
+.DS_Store
