@@ -24,6 +24,7 @@ htmlcov/
 data/raw/*.csv
 !data/raw/sample_news.csv
 data/raw/newsData/
+data/newdata/*.csv
 **/raw_analyst_ratings.csv
 
 # OS
