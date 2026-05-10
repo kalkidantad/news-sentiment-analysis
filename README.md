@@ -45,6 +45,8 @@ Run the exploratory notebook:
 jupyter notebook notebooks/01_eda_financial_news.ipynb
 ```
 
+**Important:** Jupyter must use the **same Python** where you ran `pip install -r requirements.txt`. In Cursor / VS Code, use the notebook **kernel / interpreter picker** and select `.venv/bin/python` from this repo. If `sklearn` is missing in the notebook, you are almost certainly on the wrong interpreter. Optional: register that env once with `python -m ipykernel install --user --name news-sentiment --display-name "Python (news-sentiment .venv)"`.
+
 ## Branches
 
 - `main` — integration  
