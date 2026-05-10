@@ -2,7 +2,7 @@ name: Unit tests
 
 on:
   push:
-    branches: [main, task-1, "task/**"]
+    branches: [main, task-1, task-2, "task/**"]
   pull_request:
     branches: [main]
 

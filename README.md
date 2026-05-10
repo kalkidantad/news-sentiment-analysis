@@ -45,7 +45,9 @@ Normalized or intermediate tables you produce locally may go under **`data/newda
 
 **.gitignore** (high level): `data/raw/*.csv` except `sample_news.csv`; `data/newdata/*.csv`; `**/raw_analyst_ratings.csv`; ignored paths under `data/raw/newsData/`.
 
-Historical OHLCV integration is planned for later tasks (for example Yahoo Finance).
+### Task 2 — prices, TA-Lib, PyNance
+
+Notebook: `notebooks/02_technical_analysis_talib_pynance.ipynb` downloads **daily OHLCV** with [**yfinance**](https://pypi.org/project/yfinance/) (tickers inferred from `data/raw/sample_news.csv` plus `SPY`), or loads a local CSV if you set **`YFINANCE_OFFLINE_CSV`**. Indicators use [**TA-Lib**](https://pypi.org/project/TA-Lib/) (binary wheels cover many Linux/macOS/Windows setups; source builds still need the underlying TA-Lib C library). Supplementary metrics use [**PyNance**](https://pypi.org/project/pynance/).
 
 ## Environment
 
@@ -55,13 +57,14 @@ source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Use the exploratory notebook:
+Run notebooks:
 
 ```bash
 jupyter notebook notebooks/01_eda_financial_news.ipynb
+jupyter notebook notebooks/02_technical_analysis_talib_pynance.ipynb
 ```
 
-Use the **same interpreter** where you ran `pip install`: in Cursor / VS Code, choose the **`./.venv/bin/python`** kernel (Windows: `.venv\Scripts\python.exe`). Missing `sklearn` in-cell almost always means the wrong kernel—switch interpreter or reinstall requirements in that env. Optional kernel registration:
+Use the **same interpreter** where you ran `pip install`: in Cursor / VS Code, choose the **`./.venv/bin/python`** kernel (Windows: `.venv\Scripts\python.exe`). Missing `sklearn`, `talib`, or `yfinance` in-cell almost always means the wrong kernel—switch interpreter or reinstall requirements in that env. Optional kernel registration:
 
 ```bash
 python -m ipykernel install --user --name news-sentiment --display-name "Python (news-sentiment .venv)"
@@ -71,6 +74,7 @@ python -m ipykernel install --user --name news-sentiment --display-name "Python 
 
 - `main` — integration  
 - `task-1` — EDA deliverables per challenge brief  
+- `task-2` — technical indicators (`TA-Lib`, `PyNance`) and interim reporting  
 
 ## CI
 

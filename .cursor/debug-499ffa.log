@@ -1,0 +1,11 @@
+{"sessionId": "499ffa", "hypothesisId": "H3", "location": "probe:main", "message": "probe_start", "data": {"context": "terminal_subprocess"}, "timestamp": 1778422292940, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H1", "location": "probe:matplotlib.pyplot", "message": "import_done", "data": {"seconds": 0.5963}, "timestamp": 1778422293536, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H1", "location": "probe:numpy", "message": "import_done", "data": {"seconds": 0.0}, "timestamp": 1778422293537, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H1", "location": "probe:pandas", "message": "import_done", "data": {"seconds": 0.2918}, "timestamp": 1778422293829, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H1", "location": "probe:talib", "message": "import_done", "data": {"seconds": 0.0103}, "timestamp": 1778422293839, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H1", "location": "probe:yfinance", "message": "import_done", "data": {"seconds": 0.3005}, "timestamp": 1778422294140, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H1", "location": "probe:pynance", "message": "import_done", "data": {"seconds": 0.08}, "timestamp": 1778422294220, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H2", "location": "probe:plt.style", "message": "style_applied", "data": {"seconds": 0.0003}, "timestamp": 1778422294220, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H3", "location": "probe:main", "message": "probe_total", "data": {"seconds": 1.2807}, "timestamp": 1778422294220, "runId": "import-probe"}
+{"sessionId": "499ffa", "hypothesisId": "H5", "location": "02_nb:cell1:after_future", "message": "notebook cell execution started (stdlib only)", "data": {"ts": 1778423058.1652308}, "timestamp": 1778423058165, "runId": "nb-cell1"}
+{"sessionId": "499ffa", "hypothesisId": "H1", "location": "02_nb:cell1:after_all_imports", "message": "heavy imports finished", "data": {}, "timestamp": 1778423059659, "runId": "nb-cell1"}
