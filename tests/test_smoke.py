@@ -22,3 +22,8 @@ def test_task2_stack_imports():
     import yfinance  # noqa: F401
 
     import pynance  # noqa: F401
+
+
+def test_task3_nltk_import():
+    """NLTK is required for Task 3 VADER sentiment (``scripts/task3_sentiment_return_correlation.py``)."""
+    import nltk  # noqa: F401
